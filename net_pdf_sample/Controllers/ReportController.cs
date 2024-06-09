@@ -38,7 +38,8 @@ namespace net_pdf_sample.Controllers
             // テンプレートをViewでレンダリングしてHTML文字列を作成する
             var html = await RenderViewToStringAsync("ReportTemplate", report);
             var reportPdf = new Models.ReportPdf(_tempDirectoryProvider.DirectoryName);
-            reportPdf.CreateHtmlFile(html);
+            var htmlFile = await reportPdf.CreateHtmlFile(html);
+            var pdfFile = await reportPdf.ConvertToPdfAsync(htmlFile);
             return Ok(reportPdf);
         }
 

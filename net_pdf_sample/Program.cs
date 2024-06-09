@@ -21,7 +21,6 @@ namespace net_pdf_sample
 
             builder.Services.AddSingleton(provider =>
                 new TempDirectoryProvider(provider.GetRequiredService<IHostApplicationLifetime>()));
-            builder.Services.AddControllersWithViews();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
