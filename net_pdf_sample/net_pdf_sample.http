@@ -1,0 +1,6 @@
+@net_pdf_sample_HostAddress = http://localhost:5038
+
+GET {{net_pdf_sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

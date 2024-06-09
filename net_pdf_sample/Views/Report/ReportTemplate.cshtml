@@ -1,0 +1,8 @@
+﻿@model net_pdf_sample.Models.Report
+
+<h1>@Model.Title</h1>
+<h2>context</h2>
+@foreach (var arg in Model.Args ?? Enumerable.Empty<string>())
+{
+    <p>@arg</p>
+}
