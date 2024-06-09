@@ -30,16 +30,16 @@ namespace net_pdf_sample.Controllers
         [HttpPost(Name = "Report")]
         public async Task<ActionResult<string>> PostReport(string title = "Title", string[]? args = null)
         {
-            var report = new Models.Report(_tempDirectoryProvider.DirectoryName)
+            var report = new Models.Report()
             {
                 Title = title,
                 Args = args
             };
-            // ƒeƒ“ƒvƒŒ[ƒg‚ðView‚ÅƒŒƒ“ƒ_ƒŠƒ“ƒO‚µ‚ÄHTML•¶Žš—ñ‚ðì¬‚·‚é
+            // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’Viewã§ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã—ã¦HTMLæ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹
             var html = await RenderViewToStringAsync("ReportTemplate", report);
-            //var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "reports", $"{Guid.NewGuid()}.html");
-            //System.IO.File.WriteAllText(filePath, html);
-            return Ok(html);
+            var reportPdf = new Models.ReportPdf(_tempDirectoryProvider.DirectoryName);
+            reportPdf.CreateHtmlFile(html);
+            return Ok(reportPdf);
         }
 
         private async Task<string> RenderViewToStringAsync<TModel>(string viewName, TModel model)
